@@ -83,6 +83,7 @@ public class SwipeDismissBehavior<V extends View> extends CoordinatorLayout.Beha
     private static final float DEFAULT_DRAG_DISMISS_THRESHOLD_HORIZONTAL = 0.5f;
     private static final float DEFAULT_ALPHA_START_DISTANCE = 0f;
     private static final float DEFAULT_ALPHA_END_DISTANCE = DEFAULT_DRAG_DISMISS_THRESHOLD_HORIZONTAL;
+    public static final int DEFAULT_SWIPE_DIRECTION = SWIPE_DIRECTION_ANY;
 
     ViewDragHelper mViewDragHelper;
     OnDismissListener mListener;
@@ -91,7 +92,7 @@ public class SwipeDismissBehavior<V extends View> extends CoordinatorLayout.Beha
     private float mSensitivity = 0f;
     private boolean mSensitivitySet;
 
-    int mSwipeDirection = SWIPE_DIRECTION_ANY;
+    int mSwipeDirection = DEFAULT_SWIPE_DIRECTION;
     float mDragDismissThreshold = DEFAULT_DRAG_DISMISS_THRESHOLD_HORIZONTAL;
     float mAlphaStartSwipeDistance = DEFAULT_ALPHA_START_DISTANCE;
     float mAlphaEndSwipeDistance = DEFAULT_ALPHA_END_DISTANCE;
@@ -127,7 +128,8 @@ public class SwipeDismissBehavior<V extends View> extends CoordinatorLayout.Beha
      * Sets the swipe direction for this behavior.
      *
      * @param direction one of the {@link #SWIPE_DIRECTION_START_TO_END},
-     *                  {@link #SWIPE_DIRECTION_END_TO_START} or {@link #SWIPE_DIRECTION_ANY}
+     *                  {@link #SWIPE_DIRECTION_END_TO_START}, {@link #SWIPE_DIRECTION_ANY}
+     *                  or {@link #SWIPE_DIRECTION_BOTTOM_TO_TOP}
      */
     public void setSwipeDirection(@SwipeDirection int direction) {
         mSwipeDirection = direction;

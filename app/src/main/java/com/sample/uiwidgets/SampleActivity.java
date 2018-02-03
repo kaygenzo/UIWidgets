@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
-import com.sample.uiwidgets.widgets.topbar.BaseTransientBottomBar;
-import com.sample.uiwidgets.widgets.topbar.TopSnackbar;
+import com.sample.library.widgets.topbar.SwipeDismissBehavior;
+import com.sample.library.widgets.topbar.TopSnackbar;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -27,27 +27,17 @@ public class SampleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final TestContent test = new TestContent(SampleActivity.this);
-                TopSnackbar snackbar = TopSnackbar.make(mainContent,test, test, TopSnackbar.LENGTH_INDEFINITE);
+                TopSnackbar snackbar = TopSnackbar.make(mainContent,test, TopSnackbar.LENGTH_INDEFINITE, SwipeDismissBehavior.SWIPE_DIRECTION_BOTTOM_TO_TOP);
                 snackbar.show();
             }
         });
 
     }
 
-    public class TestContent extends ConstraintLayout implements BaseTransientBottomBar.ContentViewCallback {
+    public class TestContent extends ConstraintLayout {
         public TestContent(Context context) {
             super(context);
             LayoutInflater.from(context).inflate(R.layout.topbar_center_title,this);
-        }
-
-        @Override
-        public void animateContentIn(int delay, int duration) {
-
-        }
-
-        @Override
-        public void animateContentOut(int delay, int duration) {
-
         }
     }
 }

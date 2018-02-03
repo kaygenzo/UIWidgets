@@ -62,34 +62,46 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
      * @see BaseTransientBottomBar#addCallback(BaseCallback)
      */
     public abstract static class BaseCallback<B> {
-        /** Indicates that the Snackbar was dismissed via a swipe.*/
+        /**
+         * Indicates that the Snackbar was dismissed via a swipe.
+         */
         public static final int DISMISS_EVENT_SWIPE = 0;
-        /** Indicates that the Snackbar was dismissed via an action click.*/
+        /**
+         * Indicates that the Snackbar was dismissed via an action click.
+         */
         public static final int DISMISS_EVENT_ACTION = 1;
-        /** Indicates that the Snackbar was dismissed via a timeout.*/
+        /**
+         * Indicates that the Snackbar was dismissed via a timeout.
+         */
         public static final int DISMISS_EVENT_TIMEOUT = 2;
-        /** Indicates that the Snackbar was dismissed via a call to {@link #dismiss()}.*/
+        /**
+         * Indicates that the Snackbar was dismissed via a call to {@link #dismiss()}.
+         */
         public static final int DISMISS_EVENT_MANUAL = 3;
-        /** Indicates that the Snackbar was dismissed from a new Snackbar being shown.*/
+        /**
+         * Indicates that the Snackbar was dismissed from a new Snackbar being shown.
+         */
         public static final int DISMISS_EVENT_CONSECUTIVE = 4;
 
-        /** @hide */
+        /**
+         * @hide
+         */
         @RestrictTo(LIBRARY_GROUP)
         @IntDef({DISMISS_EVENT_SWIPE, DISMISS_EVENT_ACTION, DISMISS_EVENT_TIMEOUT,
                 DISMISS_EVENT_MANUAL, DISMISS_EVENT_CONSECUTIVE})
         @Retention(RetentionPolicy.SOURCE)
-        public @interface DismissEvent {}
+        public @interface DismissEvent {
+        }
 
         /**
          * Called when the given {@link BaseTransientBottomBar} has been dismissed, either
          * through a time-out, having been manually dismissed, or an action being clicked.
          *
          * @param transientBottomBar The transient bottom bar which has been dismissed.
-         * @param event The event which caused the dismissal. One of either:
-         *              {@link #DISMISS_EVENT_SWIPE}, {@link #DISMISS_EVENT_ACTION},
-         *              {@link #DISMISS_EVENT_TIMEOUT}, {@link #DISMISS_EVENT_MANUAL} or
-         *              {@link #DISMISS_EVENT_CONSECUTIVE}.
-         *
+         * @param event              The event which caused the dismissal. One of either:
+         *                           {@link #DISMISS_EVENT_SWIPE}, {@link #DISMISS_EVENT_ACTION},
+         *                           {@link #DISMISS_EVENT_TIMEOUT}, {@link #DISMISS_EVENT_MANUAL} or
+         *                           {@link #DISMISS_EVENT_CONSECUTIVE}.
          * @see BaseTransientBottomBar#dismiss()
          */
         public void onDismissed(B transientBottomBar, @DismissEvent int event) {
@@ -114,7 +126,7 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
         /**
          * Animates the content of the transient bottom bar in.
          *
-         * @param delay Animation delay.
+         * @param delay    Animation delay.
          * @param duration Animation duration.
          */
         void animateContentIn(int delay, int duration);
@@ -122,7 +134,7 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
         /**
          * Animates the content of the transient bottom bar out.
          *
-         * @param delay Animation delay.
+         * @param delay    Animation delay.
          * @param duration Animation duration.
          */
         void animateContentOut(int delay, int duration);
@@ -135,7 +147,8 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
     @IntDef({LENGTH_INDEFINITE, LENGTH_SHORT, LENGTH_LONG})
     @IntRange(from = 1)
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Duration {}
+    public @interface Duration {
+    }
 
     /**
      * Show the Snackbar indefinitely. This means that the Snackbar will be displayed from the time
@@ -194,6 +207,7 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
     final SnackbarBaseLayout mView;
     private final ContentViewCallback mContentViewCallback;
     private int mDuration;
+    private int mSwipeDirection = SwipeDismissBehavior.DEFAULT_SWIPE_DIRECTION;
 
     private List<BaseCallback<B>> mCallbacks;
 
@@ -213,14 +227,15 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
     @RestrictTo(LIBRARY_GROUP)
     interface OnAttachStateChangeListener {
         void onViewAttachedToWindow(View v);
+
         void onViewDetachedFromWindow(View v);
     }
 
     /**
      * Constructor for the transient bottom bar.
      *
-     * @param parent The parent for this transient bottom bar.
-     * @param content The content view for this transient bottom bar.
+     * @param parent              The parent for this transient bottom bar.
+     * @param content             The content view for this transient bottom bar.
      * @param contentViewCallback The content view callback for this transient bottom bar.
      */
     protected BaseTransientBottomBar(@NonNull ViewGroup parent, @NonNull View content,
@@ -245,7 +260,7 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
         // Note that for backwards compatibility reasons we inflate a layout that is defined
         // in the extending Snackbar class. This is to prevent breakage of apps that have custom
         // coordinator layout behaviors that depend on that layout.
-        mView = (SnackbarBaseLayout) inflater.inflate( R.layout.design_layout_snackbar, mTargetParent, false);
+        mView = (SnackbarBaseLayout) inflater.inflate(R.layout.design_layout_snackbar, mTargetParent, false);
         mView.addView(content);
 
         ViewCompat.setAccessibilityLiveRegion(mView,
@@ -282,6 +297,12 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
     @NonNull
     public B setDuration(@Duration int duration) {
         mDuration = duration;
+        return (B) this;
+    }
+
+    @NonNull
+    public B setSwipeDirection(int swipeDirection) {
+        this.mSwipeDirection = swipeDirection;
         return (B) this;
     }
 
@@ -408,7 +429,7 @@ public abstract class BaseTransientBottomBar<B extends BaseTransientBottomBar<B>
                 final Behavior behavior = new Behavior(mManagerCallback);
                 behavior.setStartAlphaSwipeDistance(0.1f);
                 behavior.setEndAlphaSwipeDistance(0.6f);
-                behavior.setSwipeDirection(SwipeDismissBehavior.SWIPE_DIRECTION_BOTTOM_TO_TOP);
+                behavior.setSwipeDirection(mSwipeDirection);
                 behavior.setListener(new SwipeDismissBehavior.OnDismissListener() {
                     @Override
                     public void onDismiss(View view) {

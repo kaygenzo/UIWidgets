@@ -90,7 +90,7 @@ public final class TopSnackbar extends BaseTransientBottomBar<TopSnackbar> {
      */
 
     @NonNull
-    public static TopSnackbar make(@NonNull View container, View content, ContentViewCallback contentViewCallback, @Duration int duration) {
+    public static TopSnackbar make(@NonNull View container, View content, ContentViewCallback contentViewCallback, @Duration int duration, int swipeDirection) {
         final ViewGroup parent = findSuitableParent(container);
         if (parent == null) {
             throw new IllegalArgumentException("No suitable parent found from the given view. "
@@ -99,30 +99,24 @@ public final class TopSnackbar extends BaseTransientBottomBar<TopSnackbar> {
 
         final TopSnackbar snackbar = new TopSnackbar(parent, content, contentViewCallback);
         snackbar.setDuration(duration);
+        snackbar.setSwipeDirection(swipeDirection);
         return snackbar;
     }
 
     @NonNull
+    public static TopSnackbar make(@NonNull View container, View content, @Duration int duration, int swipeDirection) {
+        return make(container, content, new ContentViewCallback() {
+            @Override public void animateContentIn(int delay, int duration) {}
+            @Override public void animateContentOut(int delay, int duration) {}
+        }, duration, swipeDirection);
+    }
+
+    @NonNull
     public static TopSnackbar make(@NonNull View container, View content, @Duration int duration) {
-        final ViewGroup parent = findSuitableParent(container);
-        if (parent == null) {
-            throw new IllegalArgumentException("No suitable parent found from the given view. "
-                    + "Please provide a valid view.");
-        }
-
-        final TopSnackbar snackbar = new TopSnackbar(parent, content, new ContentViewCallback() {
-            @Override
-            public void animateContentIn(int delay, int duration) {
-
-            }
-
-            @Override
-            public void animateContentOut(int delay, int duration) {
-
-            }
-        });
-        snackbar.setDuration(duration);
-        return snackbar;
+        return make(container, content, new ContentViewCallback() {
+            @Override public void animateContentIn(int delay, int duration) {}
+            @Override public void animateContentOut(int delay, int duration) {}
+        }, duration, SwipeDismissBehavior.DEFAULT_SWIPE_DIRECTION);
     }
 
     private static ViewGroup findSuitableParent(View view) {
