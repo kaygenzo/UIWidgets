@@ -1,6 +1,5 @@
-package com.sample.library.wrapper;
+package com.sample.libt2s;
 
-import android.content.Context;
 import android.speech.tts.TextToSpeech;
 
 /**
