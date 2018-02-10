@@ -1,4 +1,4 @@
-package com.sample.library;
+package com.telen.library;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

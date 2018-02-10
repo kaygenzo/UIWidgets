@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sample.library.widgets.topbar;
+package com.telen.library.widgets.topbar;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -38,7 +38,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityManager;
 
-import com.sample.library.R;
+import com.telen.library.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -46,7 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
-import static com.sample.library.widgets.topbar.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
+import static com.telen.library.widgets.topbar.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
 
 /**
  * Base class for lightweight transient bars that are displayed along the bottom edge of the

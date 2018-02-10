@@ -1,4 +1,4 @@
-package com.sample.library.widgets.topbar;
+package com.telen.library.widgets.topbar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.sample.library.R;
+import com.telen.library.R;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 

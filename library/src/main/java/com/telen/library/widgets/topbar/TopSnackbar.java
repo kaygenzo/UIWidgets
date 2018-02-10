@@ -1,4 +1,4 @@
-package com.sample.library.widgets.topbar;
+package com.telen.library.widgets.topbar;
 
 /*
  * Copyright (C) 2015 The Android Open Source Project

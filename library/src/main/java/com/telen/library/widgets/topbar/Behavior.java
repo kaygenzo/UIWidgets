@@ -1,4 +1,4 @@
-package com.sample.library.widgets.topbar;
+package com.telen.library.widgets.topbar;
 
 import android.support.design.widget.CoordinatorLayout;
 import android.view.MotionEvent;

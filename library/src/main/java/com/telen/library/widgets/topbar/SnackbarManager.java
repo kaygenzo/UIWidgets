@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sample.library.widgets.topbar;
+package com.telen.library.widgets.topbar;
 
 import android.os.Handler;
 import android.os.Looper;

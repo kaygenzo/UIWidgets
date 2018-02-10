@@ -10,15 +10,25 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.sample.uiwidgets.SampleActivity">
+        tools:context="com.telen.uiwidgets.SampleActivity">
         <Button
-            android:id="@+id/trigger_topSnackBar"
+            android:id="@+id/trigger_horizontal_topSnackBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top SnackBar"
+            android:text="TopSnackBar horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="60dp"/>
+
+        <Button
+            android:id="@+id/trigger_vertical_topSnackBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TopSnackBar vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trigger_horizontal_topSnackBar"/>
+
     </android.support.constraint.ConstraintLayout>
 </android.support.design.widget.CoordinatorLayout>

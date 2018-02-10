@@ -1,4 +1,4 @@
-package com.sample.uiwidgets;
+package com.telen.uiwidgets;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

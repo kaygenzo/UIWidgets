@@ -15,7 +15,7 @@
   ~ limitations under the License.
 -->
 
-<com.sample.library.widgets.topbar.SnackbarContentLayout
+<com.telen.library.widgets.topbar.SnackbarContentLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:layout_width="match_parent"
@@ -49,4 +49,4 @@
         android:textColor="?attr/colorAccent"
         style="?attr/borderlessButtonStyle"/>
 
-</com.sample.library.widgets.topbar.SnackbarContentLayout>
+</com.telen.library.widgets.topbar.SnackbarContentLayout>

@@ -1,29 +1,46 @@
-package com.sample.uiwidgets;
+package com.telen.uiwidgets;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
-import com.sample.library.widgets.topbar.SwipeDismissBehavior;
-import com.sample.library.widgets.topbar.TopSnackbar;
+import com.telen.library.widgets.topbar.SwipeDismissBehavior;
+import com.telen.library.widgets.topbar.TopSnackbar;
 
 public class SampleActivity extends AppCompatActivity {
 
-    private Button mButtonTopSnackBar;
+    private static final String TAG = "SampleActivity";
+
+    private Button mButtonTopSnackBarHorizontal;
+    private Button mButtonTopSnackBarVertical;
     private CoordinatorLayout mainContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
-        mButtonTopSnackBar=(Button)findViewById(R.id.trigger_topSnackBar);
+
         mainContent=(CoordinatorLayout) findViewById(R.id.main_content) ;
-        mButtonTopSnackBar.setOnClickListener(new View.OnClickListener() {
+
+        mButtonTopSnackBarHorizontal=(Button)findViewById(R.id.trigger_horizontal_topSnackBar);
+        mButtonTopSnackBarVertical=(Button)findViewById(R.id.trigger_vertical_topSnackBar);
+
+
+        mButtonTopSnackBarHorizontal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final TestContent test = new TestContent(SampleActivity.this);
+                TopSnackbar snackbar = TopSnackbar.make(mainContent,test, TopSnackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+            }
+        });
+
+        mButtonTopSnackBarVertical.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final TestContent test = new TestContent(SampleActivity.this);

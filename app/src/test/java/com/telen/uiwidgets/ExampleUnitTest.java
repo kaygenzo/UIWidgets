@@ -1,4 +1,4 @@
-package com.sample.library;
+package com.telen.uiwidgets;
 
 import org.junit.Test;
 
